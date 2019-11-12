@@ -11,6 +11,10 @@ class Counter extends Component {
     console.log(this.props);
   }
 
+  static getDerivedStateFromProps(props, state) {
+   console.log("Derived --> ", props)
+  }
+
   render() {
     return (
       <div>

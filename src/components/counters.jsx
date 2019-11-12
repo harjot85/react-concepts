@@ -3,25 +3,25 @@ import Counter from "./counter";
 
 class Counters extends Component {
   render() {
-      console.log(this.props.counters)
+    // This technique is called Object Destructuring
+    // const { ...p } = this.props
+    // Cleaner alternative to the statement above is :
+    const { onReset, onRemove, onIncrement, onDelete, counters } = this.props;
     return (
       <>
-        <div
-          className="btn btn-primary m-2 btn-sm"
-          onClick={this.props.onReset}
-        >
+        <div className="btn btn-primary m-2 btn-sm" onClick={onReset}>
           Reset Cart
         </div>
-        {this.props.counters.map(counter => (
+        {counters.map(counter => (
           <Counter
             key={counter.id}
             // id={counter.id}
             // value={counter.value}
             // item={counter.item}
             counter={counter}
-            onDelete={this.props.onDelete}
-            onIncrement={this.props.onIncrement}
-            onRemove={this.props.onRemove}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
+            onRemove={onRemove}
           >
             <div className="m-2">
               <h5>{counter.item}</h5>
