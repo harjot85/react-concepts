@@ -7,36 +7,47 @@ class Counters extends Component {
       {
         id: "1",
         value: "0",
-        item: 'Discs'
+        item: "Discs"
       },
       {
         id: "2",
         value: "4",
-        item: 'Bands'
+        item: "Bands"
       },
       {
         id: "3",
         value: "0",
-        item: 'Shirts'
+        item: "Shirts"
       },
       {
         id: "4",
         value: "0",
-        item: 'Games'
+        item: "Games"
       },
       {
         id: "5",
         value: "0",
-        item: 'Books'
+        item: "Books"
       }
     ]
   };
+
+  handleDelete = (counterId) => {
+      const counters = this.state.counters.filter(c => c.id !==counterId)
+      // while it can be done but we DO NOT HAVE TO do counters: counters 
+      // because the key and the value are the same. 
+      this.setState({counters})
+  }
+
   render() {
     return (
       <>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} item={counter.item}>
-              <h5>{counter.item}</h5><hr />
+          <Counter key={counter.id} value={counter.value} id ={counter.id} item={counter.item} onDelete={this.handleDelete}>
+            <div className="m-2">
+              <h5>{counter.item}</h5>
+              <hr />
+            </div>
           </Counter>
         ))}
       </>
