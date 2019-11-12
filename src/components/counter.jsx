@@ -16,7 +16,7 @@ class Counter extends Component {
   };
 
   componentDidMount() {
-    this.setState({ value: parseInt(this.props.value) });
+    this.setState({ value: parseInt(this.props.counter.value) });
     console.log(this.props);
   }
 
@@ -25,6 +25,7 @@ class Counter extends Component {
 
     return (
       <div>
+        
         {this.props.children}
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
@@ -43,7 +44,7 @@ class Counter extends Component {
         >
           Remove
         </button>
-        <button onClick={() => this.props.onDelete(this.props.id)} className="btn btn-sm btn-danger m-2 " >Delete</button>
+        <button onClick={() => this.props.onDelete(this.props.counter.id)} className="btn btn-sm btn-outline-danger m-2 " >Delete</button>
       </div>
     );
   }

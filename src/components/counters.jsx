@@ -32,18 +32,32 @@ class Counters extends Component {
     ]
   };
 
-  handleDelete = (counterId) => {
-      const counters = this.state.counters.filter(c => c.id !==counterId)
-      // while it can be done but we DO NOT HAVE TO do counters: counters 
-      // because the key and the value are the same. 
+  handleDelete = counterId => {
+    const counters = this.state.counters.filter(c => c.id !== counterId);
+    // while it can be done but we DO NOT HAVE TO do counters: counters
+    // because the key and the value are the same.
+    this.setState({ counters });
+  };
+
+  handleReset = () => {
+      const counters = this.state.counters.map(c => {c.value = 40; return c})
+      console.log(counters)
       this.setState({counters})
   }
 
   render() {
     return (
       <>
+      <div className="btn btn-primary m-2 btn-sm" onClick={this.handleReset}>Reset Cart</div>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} id ={counter.id} item={counter.item} onDelete={this.handleDelete}>
+          <Counter
+            key={counter.id}
+            // id={counter.id}
+            // value={counter.value}
+            // item={counter.item}
+            counter={counter}
+            onDelete={this.handleDelete}
+          >
             <div className="m-2">
               <h5>{counter.item}</h5>
               <hr />
