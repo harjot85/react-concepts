@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  constructor() {
-    super();
-    this.handleIncrement = this.handleIncrement.bind(this);
-  }
-
-  state = {
-    value: 0,
-    item: ""
-  };
   styles = {
     fontSize: 12,
     padding: 9
@@ -21,51 +12,54 @@ class Counter extends Component {
   }
 
   render() {
-    let product = "My Product";
-
     return (
       <div>
-        
         {this.props.children}
-        <span style={this.styles} className={this.getBadgeClasses()}>
-          {this.formatCount()}
-        </span>
-        <button
-          //to pass arguments to the function via the event handler an inline arrow function is defined.
-          //In the body, we call the function with the argument.
-          onClick={() => this.handleIncrement(product)}
-          className="btn btn-success btn-sm"
+
+        <div
+          style={{
+            padding: "10px",
+            backgroundColor: "aliceblue",
+            textAlign: "center"
+          }}
         >
-          Add
-        </button>
-        <button
-          onClick={this.handleRemove}
-          className="btn btn-sm btn-secondary m-2"
-        >
-          Remove
-        </button>
-        <button onClick={() => this.props.onDelete(this.props.counter.id)} className="btn btn-sm btn-outline-danger m-2 " >Delete</button>
+          <span style={this.styles} className={this.getBadgeClasses()}>
+            {this.formatCount()}
+          </span>
+          <button
+            //to pass arguments to the function via the event handler an inline arrow function is defined.
+            //In the body, we call the function with the argument.
+            onClick={() => this.props.onIncrement(this.props.counter)}
+            className="btn btn-success btn-sm"
+          >
+            Add
+          </button>
+          <button
+            onClick={() => this.props.onRemove(this.props.counter)}
+            className="btn btn-sm btn-secondary m-2"
+          >
+            Remove
+          </button>
+          <button
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+            className="btn btn-sm btn-outline-danger m-2 "
+          >
+            Delete
+          </button>
+        </div>
       </div>
     );
   }
 
-  handleRemove = () => {
-    if (this.state.value > 0) this.setState({ value: this.state.value - 1 });
-  };
-
   getBadgeClasses() {
     let classes = "badge m-4 badge-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === "0" ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    const { value } = this.state;
-    return value === 0 ? "No items selected" : value + " items selected";
-  }
-
-  handleIncrement() {
-    this.setState({ value: this.state.value + 1 });
+    const c = this.props.counter;
+    return c.value === "0" ? "No items selected" : c.value + " items selected";
   }
 }
 

@@ -32,6 +32,13 @@ class Counters extends Component {
     ]
   };
 
+  handleIncrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index].value++;
+    this.setState({ counters });
+  };
+
   handleDelete = counterId => {
     const counters = this.state.counters.filter(c => c.id !== counterId);
     // while it can be done but we DO NOT HAVE TO do counters: counters
@@ -39,16 +46,29 @@ class Counters extends Component {
     this.setState({ counters });
   };
 
+  handleRemove = counter => {
+    if (counter.value < 1) return;
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index].value--;
+    this.setState({ counters });
+  };
+
   handleReset = () => {
-      const counters = this.state.counters.map(c => {c.value = 40; return c})
-      console.log(counters)
-      this.setState({counters})
-  }
+    const counters = this.state.counters.map(c => {
+      c.value = 0;
+      return c;
+    });
+    console.log(counters);
+    this.setState({ counters });
+  };
 
   render() {
     return (
       <>
-      <div className="btn btn-primary m-2 btn-sm" onClick={this.handleReset}>Reset Cart</div>
+        <div className="btn btn-primary m-2 btn-sm" onClick={this.handleReset}>
+          Reset Cart
+        </div>
         {this.state.counters.map(counter => (
           <Counter
             key={counter.id}
@@ -57,6 +77,8 @@ class Counters extends Component {
             // item={counter.item}
             counter={counter}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
+            onRemove={this.handleRemove}
           >
             <div className="m-2">
               <h5>{counter.item}</h5>
