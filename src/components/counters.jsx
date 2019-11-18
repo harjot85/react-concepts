@@ -15,9 +15,6 @@ class Counters extends Component {
         {counters.map(counter => (
           <Counter
             key={counter.id}
-            // id={counter.id}
-            // value={counter.value}
-            // item={counter.item}
             counter={counter}
             onDelete={onDelete}
             onIncrement={onIncrement}
